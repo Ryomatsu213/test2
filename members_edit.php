@@ -17,7 +17,6 @@ $pdo=new PDO('mysql:host=localhost;dbname=data;charset=utf8', 'user', 'password'
 $sql=$pdo->prepare('select * from member where id=?');
 $sql->execute([$_REQUEST['id']]);
 foreach ($sql as $row) {
-	if(isset($row('name'))){
 ?>
 
 <tr>
@@ -35,9 +34,9 @@ foreach ($sql as $row) {
 </table>
 
 <?php
-	} else{
-		echo '入力されたIDは存在しません。正しいIDを入力してください。';
-	}
+}
+if(empty($row)){
+	exit('入力されたメンバーIDは存在しません。');
 }
 ?>
 
